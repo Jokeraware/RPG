@@ -11,6 +11,7 @@ class Fighter extends Character {
     }
     else {
       console.log('Not enough mana');
+      this.dealDamage(victim);
     }
   }
 }

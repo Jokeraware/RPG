@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const playerName = document.getElementById('playerName').value;
     console.log("Player name:", playerName);
 
-    // Create a new character object with the selected class and player's name
+    // Create a new character with the selected class and player's name
     let playerCharacter;
     switch (selectedClass) {
       case 'Fighter':
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // Launch game with the selected character
+    // Launch game with the player character
     const game = new Game(playerCharacter);
     game.startGame();
   });

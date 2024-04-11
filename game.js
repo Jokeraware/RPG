@@ -35,46 +35,53 @@ class Game {
         if (character.state === 'Playing') {
           console.log(`It's time for ${character.name} to play.`);
           let enemies = this.characters.filter(enemy => enemy.state === 'Playing' && enemy !== character);
-          // Ajouter le joueur à la liste des ennemis potentiels
+          // Add player to enemy list
           if (this.player.state === 'Playing') {
             enemies.push(this.player);
           }
           const randomEnemy = enemies[Math.floor(Math.random() * enemies.length)];
-          character.dealDamage(randomEnemy);
-          console.log(`${character.name} is attacking ${randomEnemy.name}. He deals him ${character.dmg} damages. ${randomEnemy.name} got ${randomEnemy.hp} lifepoints left.`);
+          // Randomly decide whether to perform a simple attack or a special attack
+          const randomAction = Math.random() < 0.5 ? '1' : '2'; // 50/50, pile ou face donc 1 ou 2
+          if (randomAction === '1') {
+            character.dealDamage(randomEnemy);
+            console.log(`${character.name} is attacking ${randomEnemy.name} with a simple attack. He deals him ${character.dmg} damage. ${randomEnemy.name} has ${randomEnemy.hp} health points left.`);
+          } else {
+              character.atkSpe(randomEnemy);
+              console.log(`${character.name} is attacking ${randomEnemy.name} with a special attack. He deals him ${character.dmg} damage. ${randomEnemy.name} has ${randomEnemy.hp} health points left.`);
+            } 
           this.watchStats();
         }
       });
   
       // Player's turn
-      if (this.player.state === 'Playing'){
+      if (this.player.state === 'Playing') {
         console.log("It's your turn to play");
-      let action = prompt("1. Simple Attack | 2. Special Attack");
-      let target = prompt("Enter the target's name");
-      let victim = this.characters.find(character => character.name === target && character.state === 'Playing');
-      if (victim) {
-        if (action === '1') {
-          this.player.dealDamage(victim);
-          console.log(`${this.player.name} is attacking ${victim.name}. He deals him ${this.player.dmg} damages. ${victim.name} got ${victim.hp} lifepoints left.`);
-        } else if (action === '2' && this.player.mana >= this.player.atkSpeManaCost) {
-          this.player.atkSpe(victim);
-          console.log(`${this.player.name} is attacking ${victim.name}. He deals him ${this.player.dmg} damages. ${victim.name} got ${victim.hp} lifepoints left.`);
-        } else if (action === '2' && this.player.mana < this.player.atkSpeManaCost) {
-          console.log("Not enough mana");
-        } else {
-          console.log("Invalid target or target is already dead, try next turn");
-        }
-      } else {
-        console.log("You failed, try next turn");
-      }
+        let action = prompt("1. Simple Attack | 2. Special Attack");
+        let target = prompt("Enter the target's name");
+        let victim = this.characters.find(character => character.name === target && character.state === 'Playing');
+          if (victim) {
+            if (action === '1') {
+              this.player.dealDamage(victim);
+              console.log(`${this.player.name} is attacking ${victim.name}. He deals him ${this.player.dmg} damages. ${victim.name} got ${victim.hp} lifepoints left.`);
+            } else if (action === '2' && this.player.mana >= this.player.atkSpeManaCost) {
+              this.player.atkSpe(victim);
+              console.log(`${this.player.name} is attacking ${victim.name}. He deals him ${this.player.dmg} damages. ${victim.name} got ${victim.hp} lifepoints left.`);
+            } else if (action === '2' && this.player.mana < this.player.atkSpeManaCost) {
+              console.log("Not enough mana");
+            } else {
+              console.log("Invalid target or target is already dead, try next turn");
+            }
+          } else {
+            console.log("You failed, try next turn");
+          }
   
-      this.watchStats();
-      this.skipTurn();
-      if (this.checkWinner()){
-        this.endGame();
-        return;
-      }
-      this.startTurn();
+        this.watchStats();
+        this.skipTurn();
+        if (this.checkWinner()){
+          this.endGame();
+          return;
+        }
+        this.startTurn();
       }
       else if (this.player.state === 'Loser') {
         console.log("You have been defeated by an NPC!");
@@ -82,9 +89,6 @@ class Game {
       }
     }
   }
-  
-  
-  
   
   watchStats() {
     console.log("Player Stats:");
@@ -118,7 +122,6 @@ class Game {
       winner.state = 'Winner';
     }
   }
-  
 }
 
 const npc1 = new Fighter("Grace");

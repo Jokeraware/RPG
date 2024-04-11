@@ -8,34 +8,40 @@
   <title>RPG</title>
 </head>
 <body>
-  <h1>Welcome to the RPG de la hess parce que pourquoi pas 🤷🏻</h1>
+  <h1 class="text-center">Welcome to the RPG</h1>
 
-  <select class="form-select" aria-label="Default select example" id="classSelect">
-    <option selected>Choose your class</option>
-    <option value="Fighter">Fighter</option>
-    <option value="Paladin">Paladin</option>
-    <option value="Monk">Monk</option>
-    <option value="Berserker">Berserker</option>
-    <option value="Assassin">Assassin</option>
-    <option value="Wizard">Wizard</option>
-  </select>
-
-  <div class="mb-3">
-    <label for="playerName" class="form-label">Enter your name:</label>
-    <input type="text" class="form-control" id="playerName">
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <label for="playerName" class="form-label">Select your class:</label>
+    <select class="form-select w-50" aria-label="Default select example" id="classSelect">
+      <option value="Fighter">Fighter</option>
+      <option value="Paladin">Paladin</option>
+      <option value="Monk">Monk</option>
+      <option value="Berserker">Berserker</option>
+      <option value="Assassin">Assassin</option>
+      <option value="Wizard">Wizard</option>
+    </select>
   </div>
 
-  <button id="startButton">Start the game</button>
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <label for="playerName" class="form-label">Enter your name:</label>
+    <input type="text" class="form-control w-50" id="playerName">
+  </div>
+
+  <div class="d-flex flex-column justify-content-center align-items-center p-3">
+    <button class="btn btn-outline-dark" id="startButton">Start the game</button>
+  </div>
   
+  <div class="d-flex flex-column justify-content-center align-items-center">
   <h2>Here the class</h2>
 
-  <table class="table">
+  <table class="table table-sm table-bordered w-75">
     <thead>
       <tr>
         <th scope="col">Class</th>
         <th scope="col">HP</th>
         <th scope="col">Mana</th>
         <th scope="col">Damages</th>
+        <th scope="col">Special Attack</th>
       </tr>
     </thead>
     <tbody>
@@ -44,39 +50,46 @@
         <td>12</td>
         <td>40</td>
         <td>4</td>
+        <td>Dark Vision (5 dmg) 20mana</td>
       </tr>
       <tr>
         <th scope="row">Paladin</th>
         <td>16</td>
         <td>160</td>
         <td>3</td>
+        <td>Healing Lighting (5 dmg) 40</td>
       </tr>
       <tr>
         <th scope="row">Monk</th>
         <td>8</td>
         <td>200</td>
         <td>2</td>
+        <td>Heal (+8 hp) 25</td>
       </tr>
       <tr>
         <th scope="row">Berserker</th>
         <td>8</td>
         <td>0</td>
         <td>4</td>
+        <td>Rage (+1 dmg, -1hp)</td>
       </tr>
       <tr>
         <th scope="row">Assassin</th>
         <td>6</td>
         <td>20</td>
         <td>6</td>
+        <td>Shadow Hit (7 dmg, -7hp if enemy not dead) 20</td>
       </tr>
       <tr>
         <th scope="row">Wizard</th>
         <td>10</td>
         <td>200</td>
         <td>2</td>
+        <td>Fireball (7 dmg) 25</td>
       </tr>
     </tbody>
   </table>
+</div>
 
   <!-- GAME JS SCRIPTS -->
   <script src="characters.js"></script>
