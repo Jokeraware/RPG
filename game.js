@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     this.turnLeft = 10;
-    this.characters = [Grace, Ulder, Moana, Draven, Carl];
+    this.characters = [grace, ulder, moana, draven, carl, harry];
   }
 
   skipTurn() {
@@ -22,7 +22,7 @@ class Game {
     if (this.turnLeft === 0) {
       this.endGame();
     }
-    let choice = prompt("1: Watch stats, 2: Attack");
+    let choice = prompt("1: Watch stats | 2: Attack");
       if (choice === '1') {
         this.watchStats();
         this.startTurn();
@@ -31,7 +31,7 @@ class Game {
         this.randomCharacters().forEach((character) => {
           if (character.state === 'Playing') {
             console.log(`It's time for ${character.name} to play.`);
-            let action = prompt("1: Simple Attack, 2: Special Attack");
+            let action = prompt("1: Simple Attack | 2: Special Attack");
             let target = prompt("Choose a target, enter name");
             let victim = this.characters.find(character => character.name === target);
             if (victim && victim.state === 'Playing') {
@@ -59,6 +59,7 @@ class Game {
       if (this.checkWinner()) {
         return;
       }
+      updateStatsTable(this.characters);
       this.startTurn();
       }
       else {
@@ -99,5 +100,10 @@ class Game {
   }
 }
 
-const game = new Game();
-game.startGame();
+const grace = new Fighter("Grace");
+const ulder = new Paladin("Ulder");
+const moana = new Monk("Moana");
+const draven = new Berserker("Draven");
+const carl = new Assassin("Carl");
+const harry = new Wizard("Harry");
+
