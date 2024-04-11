@@ -26,6 +26,7 @@ class Character {
 class Fighter extends Character {
   constructor (name, hp = 12, mana = 40, dmg = 4) {
     super(name, hp, mana, dmg);
+    this.atkSpeManaCost = 20;
   }
 
   atkSpe(victim) {
@@ -34,7 +35,7 @@ class Fighter extends Character {
       this.mana -= 20;
     }
     else {
-      console.log('Pas assez de mana');
+      console.log('Not enough mana');
     }
   }
 }
@@ -42,6 +43,7 @@ class Fighter extends Character {
 class Paladin extends Character {
   constructor (name, hp = 16, mana = 160, dmg = 3) {
     super(name, hp, mana, dmg);
+    this.atkSpeManaCost = 40;
   }
 
   atkSpe(victim) {
@@ -51,7 +53,7 @@ class Paladin extends Character {
       this.hp += 5;
     }
     else {
-      console.log('Pas assez de mana');
+      console.log('Not enough mana');
     }
   }
 }
@@ -59,6 +61,7 @@ class Paladin extends Character {
 class Monk extends Character {
   constructor (name, hp = 8, mana = 200, dmg = 2) {
     super(name, hp, mana, dmg);
+    this.atkSpeManaCost = 25;
   }
 
   atkSpe() {
@@ -67,7 +70,7 @@ class Monk extends Character {
       this.hp += 8;
     }
     else {
-      console.log('Pas assez de mana');
+      console.log('Not enough mana');
     }
   }
 }
@@ -86,6 +89,7 @@ class Berserker extends Character {
 class Assassin extends Character {
   constructor (name, hp = 6, mana = 20, dmg = 6) {
     super(name, hp, mana, dmg);
+    this.atkSpeManaCost = 20;
   }
 
   atkSpe(victim) {
@@ -97,90 +101,8 @@ class Assassin extends Character {
       }
     }
     else {
-      console.log('Pas assez de mana');
+      console.log('Not enough mana');
     }
-  }
-}
-
-// Start 
-class Game {
-  constructor() {
-    this.turnLeft = 10;
-    this.characters = [Grace, Ulder, Moana, Draven, Carl];
-  }
-
-  skipTurn() {
-    if (this.turnLeft > 0) {
-      this.turnLeft--;
-    }
-    else if (this.turnLeft === 0) {
-      this.endGame();
-    }
-  }
-
-  endGame() {
-    console.log('The game is over!');
-  }
-
-  startTurn() {
-    console.log(`It's turn ${11 - this.turnLeft}`)
-    let choice = prompt("1: Watch stats, 2: Attack");
-      if (choice === '1') {
-        this.watchStats();
-        this.startTurn();
-      }
-      else if (choice === '2') {
-        this.randomCharacters().forEach((character) => {
-          if (character.state === 'Playing') {
-            console.log(`It's time for ${character.name} to play.`);
-            let action = prompt("1: Simple Attack, 2:Special Attack");
-            let target = prompt("Choose a target, enter name");
-            let victim = this.characters.find(character => character.name === target);
-            if (victim && victim.state === 'Playing') {
-              if (action === '1') {
-                character.dealDamage(victim);
-                console.log(`${character.name} is attacking ${victim.name}. He deals him ${character.dmg} damages. ${victim.name} got ${victim.hp} lifepoints left.`);
-              }
-              else if (action === '2') {
-                character.atkSpe(victim);
-                console.log(`${character.name} is attacking ${victim.name}. He deals him ${character.dmg} damages. ${victim.name} got ${victim.hp} lifepoints left.`);
-              }
-            }
-            else {
-              console.log("Invalid target or target is already dead, try next time");
-            }
-          }
-          else {
-            console.log(`${character.name} is dead, he can't play`);
-          }
-        });
-      this.skipTurn();
-      this.startTurn();
-      }
-      else {
-        console.log("Invalid choice, try again");
-      }
-      
-  }
-
-  watchStats() {
-    this.characters.forEach((character) => {
-      if (character.state === 'Playing') {
-        console.log(`${character.name} : PV = ${character.hp}, Mana = ${character.mana}, Damage = ${character.dmg}`);
-      }
-      else {
-        console.log(`${character.name} = Dead`);
-      }
-    })
-  }
-
-  randomCharacters() {
-    return this.characters.sort(() => Math.random() - 0.5);
-  }
-
-  startGame() {
-    console.log('Let the game begin!');
-    this.startTurn();
   }
 }
 
@@ -189,6 +111,3 @@ const Ulder = new Paladin("Ulder");
 const Moana = new Monk("Moana");
 const Draven = new Berserker("Draven");
 const Carl = new Assassin("Carl");
-
-const game = new Game();
-game.startGame();
