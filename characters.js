@@ -20,5 +20,8 @@ class Character {
     if (victim.state === 'Loser') {
       this.mana += 20;
     }
+    if (this === this.player && victim.state === 'Loser') {
+      this.mana += 20;
+    }
   }
 }
