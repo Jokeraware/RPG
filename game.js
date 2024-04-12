@@ -48,8 +48,7 @@ class Game {
           } else {
               character.atkSpe(randomEnemy);
               console.log(`${character.name} is attacking ${randomEnemy.name} with a special attack. He deals him ${character.dmg} damage. ${randomEnemy.name} has ${randomEnemy.hp} health points left.`);
-            } 
-          this.watchStats();
+          } 
         }
       });
   
@@ -74,7 +73,7 @@ class Game {
           } else {
             console.log("You failed, try next turn");
           }
-  
+        updateStatsTable(this);  
         this.watchStats();
         this.skipTurn();
         if (this.checkWinner()){
