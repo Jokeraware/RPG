@@ -24,6 +24,7 @@ class Game {
   }
 
   startTurn() {
+    console.log("\n"); // <br> on console
     console.log(`It's turn ${11 - this.turnLeft}`);
     
     if (this.turnLeft === 0) {
@@ -51,6 +52,7 @@ class Game {
           } 
         }
       });
+      this.watchStats();
   
       // Player's turn
       if (this.player.state === 'Playing') {
@@ -73,7 +75,6 @@ class Game {
           } else {
             console.log("You failed, try next turn");
           }
-        updateStatsTable(this);  
         this.watchStats();
         this.skipTurn();
         if (this.checkWinner()){
@@ -88,7 +89,7 @@ class Game {
       }
     }
   }
-  
+
   watchStats() {
     console.log("Player Stats:");
     console.log(`${this.player.name} : PV = ${this.player.hp}, Mana = ${this.player.mana}, Damage = ${this.player.dmg}`);

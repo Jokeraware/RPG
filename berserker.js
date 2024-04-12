@@ -8,4 +8,4 @@ class Berserker extends Character {
     this.hp -=1;
     this.dmg++;
   }
-}swz  
+}
